@@ -6,4 +6,4 @@
 .project
 .classpath
 RemoteSystemsTempFiles
-*.class
+.class
