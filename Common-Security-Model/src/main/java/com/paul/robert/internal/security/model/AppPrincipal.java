@@ -21,19 +21,23 @@ import lombok.NoArgsConstructor;
 public class AppPrincipal implements UserDetails {
 
 	private static final long serialVersionUID = 9098152614590113044L;
-
-	@Builder.Default  
-	private Collection<GrantedAuthority> authorities = new ArrayList<>();
+	
 	private String password;
 	private String username;
-	private boolean accountNonExpired;
-	private boolean accountNonLocked;
-	private boolean credentialsNonExpired;
-	private boolean enabled;
-
-	@Builder.Default 
-	private List<String> accesses = new ArrayList<>();
+	private String subjectDn;
 	
+	@Builder.Default private Collection<GrantedAuthority> authorities = new ArrayList<>();
+	@Builder.Default private boolean accountNonExpired = true;
+	@Builder.Default private boolean accountNonLocked = true;
+	@Builder.Default private boolean credentialsNonExpired = true;
+	@Builder.Default private boolean enabled = true;
+	@Builder.Default private List<String> accesses = new ArrayList<>();
+
+	/**
+	 * Helper utility  method on the AppPrincipal Method
+	 * @param principal
+	 * @return
+	 */
 	public static List<String> convertAuthoritiesToStringList(AppPrincipal principal) {
 		return principal.getAuthorities()
 				.stream()
