@@ -47,4 +47,15 @@ public class AppPrincipal implements UserDetails {
 				.collect(Collectors.toList());
 	}
 	
+	/**
+	 * This is to move the responsibilities of converting a list of String to GrantedAuthorities
+	 * on this internal model object.
+	 */
+	public void convertListOfRolesAndSetToGrantedAuthorities(List<String> authStrings) {
+		List<SimpleGrantedAuthority> convertedAuthorities = 
+				authStrings.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
+		this.getAuthorities().clear();
+		this.getAuthorities().addAll(convertedAuthorities);
+	}
+	
 }
