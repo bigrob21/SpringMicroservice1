@@ -1,0 +1,27 @@
+server:
+  port: 7443
+  ssl:
+    key-store: ${KEYSTORE_FILE:classpath:pki/server.jks}
+    trust-store: ${TRUSTSTORE_FILE:classpath:pki/trust.jks}
+    key-password: ${KEYSTORE_PASS:nopass}
+    trust-store-password: ${TRUSTSTORE_PASS:nopass} 
+    enabled: true
+    client-auth: want
+
+spring:
+  application:
+    name: zuul-gateway-service
+
+zuul:
+  routes:
+    hello-service:
+      service-id: hello-world-service
+      path: /api/hello/**
+      sensitive-headers:
+    ##TODO: More Destinations Here    
+         
+eureka:
+  client:
+    serviceUrl:
+#      defaultZone: http://localhost:8761/eureka
+      defaultZone: ${EUREKA_SERVER1:http://localhost:8761/eureka}
