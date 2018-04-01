@@ -23,6 +23,11 @@
 			<version>${servlet.spec.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+			<groupId>com.paul.robert</groupId>
+			<artifactId>Common-Security-Model</artifactId>
+			<version>1.00.00</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<plugins>

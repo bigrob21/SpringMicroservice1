@@ -44,6 +44,11 @@
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-eureka</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.paul.robert</groupId>
+			<artifactId>Common-Security-Components</artifactId>
+			<version>1.00.00</version>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
