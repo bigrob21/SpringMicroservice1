@@ -3,7 +3,14 @@ server:
 spring:
   application:
     name: eureka-server
+
 eureka:
+  instance:
+    lease-expiration-duration-in-seconds: 90 
+    lease-renewal-interval-in-seconds: 30
   client:
     registerWithEureka: false
     fetchRegistry: false
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 5000

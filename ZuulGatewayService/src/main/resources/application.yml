@@ -6,7 +6,7 @@ server:
     key-password: ${KEYSTORE_PASS:nopass}
     trust-store-password: ${TRUSTSTORE_PASS:nopass} 
     enabled: true
-    client-auth: want
+    client-auth: need
 
 spring:
   application:
