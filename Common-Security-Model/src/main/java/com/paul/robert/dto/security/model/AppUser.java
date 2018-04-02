@@ -35,6 +35,7 @@ public class AppUser {
 		return AppUser.builder()
 			.userName(appUser.getUsername())
 			.roles(AppPrincipal.convertAuthoritiesToStringList(appUser))
+			.subjectDn(appUser.getSubjectDn())
 			.accesses(appUser.getAccesses())
 			.build();
 	}
