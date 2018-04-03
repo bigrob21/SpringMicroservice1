@@ -4,14 +4,11 @@ import java.util.Calendar;
 import java.util.Optional;
 import java.util.UUID;
 
-import org.springframework.stereotype.Component;
-
 import com.paul.robert.dto.security.model.AppUser;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 
-@Component("jwtUtility")
 public class AppUserJWTParser implements JWTPrincipalParser<AppUser> {
 
 	private String secretKey;
