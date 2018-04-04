@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<entity-mappings version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_2_0.xsd ">
+	
+	<entity class="com.paul.robert.internal.security.model.AppPrincipal">
+	   <table name="APP_USERS" />
+	   <attributes>
+	       <id name="username">
+	           <column nullable="false" name="uname" unique="true"/>
+	       </id>
+	       <basic name="password" >
+	           <column name="passwd" />
+	       </basic>
+	       <basic name="subjectDn">
+	           <column/>
+	       </basic>
+	       <basic name="accountNonExpired">
+	           <column column-definition="default true" name="account_non_expired"/>
+	       </basic>
+	       <basic name="enabled">
+               <column column-definition="default true" name="enabled"/>
+           </basic>
+	       <basic name="accountNonLocked">
+               <column column-definition="default true" name="account_non_locked"/>
+           </basic>
+	       <basic name="credentialsNonExpired">
+	           <column column-definition="default true" name="credentials_non_expired"/>
+	       </basic>
+	   </attributes>
+	</entity>
+	
+	
+</entity-mappings>

@@ -18,6 +18,11 @@ zuul:
       service-id: hello-world-service
       path: /api/hello/**
       sensitive-headers:
+    ##BEST PRACTICE DO NOT EXPOSE THE AUTH SERVICE THROUGH THE PUBLIC API. HIDE IT WHEN DONE TESTING!!!!  
+    auth-service:
+      service-id: authentication-service
+      path: /api/auth/**
+      sensitive-headers:
     ##TODO: More Destinations Here    
          
 eureka:

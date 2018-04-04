@@ -26,7 +26,7 @@ public class AppPrincipal implements UserDetails {
 	private String username;
 	private String subjectDn;
 	
-	@Builder.Default private Collection<GrantedAuthority> authorities = new ArrayList<>();
+	@Builder.Default private Collection<? extends GrantedAuthority> authorities = new ArrayList<>();
 	@Builder.Default private boolean accountNonExpired = true;
 	@Builder.Default private boolean accountNonLocked = true;
 	@Builder.Default private boolean credentialsNonExpired = true;
@@ -52,10 +52,10 @@ public class AppPrincipal implements UserDetails {
 	 * on this internal model object.
 	 */
 	public void convertListOfRolesAndSetToGrantedAuthorities(List<String> authStrings) {
-		List<SimpleGrantedAuthority> convertedAuthorities = 
+		List<? extends GrantedAuthority> convertedAuthorities = 
 				authStrings.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 		this.getAuthorities().clear();
-		this.getAuthorities().addAll(convertedAuthorities);
+		this.setAuthorities(convertedAuthorities);
 	}
 	
 }
