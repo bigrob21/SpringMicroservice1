@@ -1,10 +1,12 @@
 .metadata
 .recommenders
-*/target
+**/target
+**/target/**
 */bin
-.settings
 **/.settings
 .project
+**/.project
+**/.classpath
 .classpath
 RemoteSystemsTempFiles
-.class
+**/.class
