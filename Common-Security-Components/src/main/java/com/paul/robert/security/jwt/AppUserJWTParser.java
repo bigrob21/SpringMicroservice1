@@ -63,7 +63,6 @@ public class AppUserJWTParser implements JWTPrincipalParser<AppUser> {
 		}
 		String body = tokens[1];
 		String decodedJson = new String(Base64.getDecoder().decode(body));
-		System.out.println(decodedJson);
 		JsonNode rootNode = null;
 		try {
 			rootNode = this.mapper.readTree(decodedJson);
