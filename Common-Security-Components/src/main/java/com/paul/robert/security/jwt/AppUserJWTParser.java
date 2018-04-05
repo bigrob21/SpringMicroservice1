@@ -57,14 +57,9 @@ public class AppUserJWTParser implements JWTPrincipalParser<AppUser> {
 		if(token == null || token.trim().isEmpty()) {
 			return retVal;
 		}
-		String[] tokens = token.split("\\.");
-		if(tokens.length != 3) {
-			throw new IllegalArgumentException("Unable to parse presented JWT token - " + token);
-		}
-		String body = tokens[1];
-		String decodedJson = new String(Base64.getDecoder().decode(body));
 		JsonNode rootNode = null;
 		try {
+			final String decodedJson = extractPayloadAsJsonFromJwtTokenFromBody(token);
 			rootNode = this.mapper.readTree(decodedJson);
 			retVal = this.mapper.readValue(rootNode.path("user").toString(), AppUser.class);
 		} catch (IOException e) {
