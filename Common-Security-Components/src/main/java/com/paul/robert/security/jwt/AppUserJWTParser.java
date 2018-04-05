@@ -1,9 +1,12 @@
 package com.paul.robert.security.jwt;
 
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.UUID;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.paul.robert.dto.security.model.AppUser;
 
@@ -21,7 +24,6 @@ public class AppUserJWTParser implements JWTPrincipalParser<AppUser> {
 	private long tokenExpirationInMillis = 30000;
 	@Getter @Setter
 	private ObjectMapper mapper = new ObjectMapper(); 
-	
 	
 	public AppUserJWTParser(String secret){
 		this.secretKey = Optional.ofNullable(secret)
@@ -50,8 +52,27 @@ public class AppUserJWTParser implements JWTPrincipalParser<AppUser> {
 	}
 
 	@Override
-	public AppUser parseToken(String token) {
-		return null;
+	public AppUser parseToken(String token)  {
+		AppUser retVal = null;
+		if(token == null || token.trim().isEmpty()) {
+			return retVal;
+		}
+		String[] tokens = token.split("\\.");
+		if(tokens.length != 3) {
+			throw new IllegalArgumentException("Unable to parse presented JWT token - " + token);
+		}
+		String body = tokens[1];
+		String decodedJson = new String(Base64.getDecoder().decode(body));
+		System.out.println(decodedJson);
+		JsonNode rootNode = null;
+		try {
+			rootNode = this.mapper.readTree(decodedJson);
+			retVal = this.mapper.readValue(rootNode.path("user").toString(), AppUser.class);
+		} catch (IOException e) {
+			e.printStackTrace();
+			throw new RuntimeException("Unable to read JWT Token for valid Value.");
+		}
+		return retVal;
 	}
 
 }
