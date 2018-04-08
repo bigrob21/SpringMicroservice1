@@ -6,7 +6,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.filter.GenericFilterBean;
 
-import com.paul.robert.security.common.web.filters.CommonHeaderResponsePersistenceFilter;
+import com.paul.robert.security.common.web.filters.ProxiedSubjectHeaderPersistenceFilter;
 
 @SpringBootApplication
 @EnableDiscoveryClient
@@ -19,7 +19,7 @@ public class InternalUserAuthenticationServiceApplication {
 	//TODO: Remove this once the Web Filter framework is ready.
 	@Bean
 	public GenericFilterBean subjectHeaderFilterBean() {
-		return new CommonHeaderResponsePersistenceFilter();
+		return new ProxiedSubjectHeaderPersistenceFilter();
 	}
 	
 }

@@ -1,7 +1,6 @@
 package com.paul.robert.security.jwt;
 
 import java.io.IOException;
-import java.util.Base64;
 import java.util.Calendar;
 import java.util.Optional;
 import java.util.UUID;
