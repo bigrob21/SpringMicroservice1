@@ -36,7 +36,8 @@ public class JWTTokenExtractorFilter extends OncePerRequestFilter {
 			if(rawJwtToken != null && !rawJwtToken.trim().isEmpty()) {
 				AppUser uzer = getAppUserFromToken(rawJwtToken);
 				AppPrincipal principal = AppUser.convertAppUserToAppPrincipal(uzer, uzer.getSubjectDn());
-				PreAuthenticatedAuthenticationToken authentedToken = new PreAuthenticatedAuthenticationToken(principal, rawJwtToken, principal.getAuthorities());
+				PreAuthenticatedAuthenticationToken authentedToken = 
+						new PreAuthenticatedAuthenticationToken(principal, rawJwtToken, principal.getAuthorities());
 				SecurityContextHolder.getContext().setAuthentication(authentedToken);
 			}
 		}
