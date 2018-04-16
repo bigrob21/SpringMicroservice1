@@ -21,7 +21,7 @@ public class JWTTokenExtractorFilter extends OncePerRequestFilter {
 	private JWTPrincipalParser<?> principalParser;
 	
 	public JWTTokenExtractorFilter(JWTPrincipalParser<?> parser) {
-		Objects.requireNonNull(parser, "Missing required dependency " + principalParser.getClass());
+		Objects.requireNonNull(parser, "Missing required dependency " + parser.getClass());
 		this.principalParser = parser;
 	}
 	
@@ -29,16 +29,19 @@ public class JWTTokenExtractorFilter extends OncePerRequestFilter {
 	protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
 			throws ServletException, IOException 
 	{
-		final String jwtTokeFromHeaeder = request.getHeader("Authorization");
+		final String jwtTokeFromHeader = request.getHeader("Authorization");
 		String rawJwtToken = "";
-		if(jwtTokeFromHeaeder != null && !jwtTokeFromHeaeder.trim().isEmpty()) {
-			rawJwtToken = extractToken(jwtTokeFromHeaeder);
+		if(jwtTokeFromHeader != null && !jwtTokeFromHeader.trim().isEmpty()) {
+			rawJwtToken = extractToken(jwtTokeFromHeader);
 			if(rawJwtToken != null && !rawJwtToken.trim().isEmpty()) {
 				AppUser uzer = getAppUserFromToken(rawJwtToken);
 				AppPrincipal principal = AppUser.convertAppUserToAppPrincipal(uzer, uzer.getSubjectDn());
 				PreAuthenticatedAuthenticationToken authentedToken = 
 						new PreAuthenticatedAuthenticationToken(principal, rawJwtToken, principal.getAuthorities());
 				SecurityContextHolder.getContext().setAuthentication(authentedToken);
+				
+				response.setHeader("Authorization", "Bearer: " + rawJwtToken);
+				
 			}
 		}
 	}

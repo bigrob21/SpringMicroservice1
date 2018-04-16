@@ -24,11 +24,11 @@ public class AppUserJWTParser implements JWTPrincipalParser<AppUser> {
 	@Getter @Setter
 	private ObjectMapper mapper = new ObjectMapper(); 
 	
-	public AppUserJWTParser(String secret){
+	/*public AppUserJWTParser(String secret){
 		this.secretKey = Optional.ofNullable(secret)
 			.filter(str -> str != null && !str.trim().equals(""))
 			.orElseThrow(() -> new IllegalArgumentException("A secret key must be provided!"));
-	}
+	}*/
 	
 	public AppUserJWTParser(String secret, long tokenExpirationTime){
 		this.secretKey = Optional.ofNullable(secret)

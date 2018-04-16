@@ -30,3 +30,7 @@ eureka:
     serviceUrl:
 #      defaultZone: http://localhost:8761/eureka
       defaultZone: ${EUREKA_SERVER1:http://localhost:8761/eureka}
+      
+app:
+  security:
+    secret: Abracadabr@
